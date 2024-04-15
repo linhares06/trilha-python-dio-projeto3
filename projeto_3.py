@@ -88,14 +88,14 @@ class ContaCorrente(Conta):
     
     def sacar(self, valor: float) -> bool:
 
-        if self.numero_saques > self.limite_saques:
+        if self.numero_saques >= self.limite_saques:
             print('Limite de saque diário atingido.')
         elif valor > self.limite:
             print(f'O valor do saque é maior do que o limite de R${self.limite} por saque.')
-        else:
+        elif super().sacar(valor):
             self.numero_saques += 1
-            return super().sacar(valor)
-        
+            return True
+
         return False
     
     def __str__(self):
